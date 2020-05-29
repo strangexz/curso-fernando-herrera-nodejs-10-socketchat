@@ -18,6 +18,8 @@ socket.on('connect', function () {
 
     socket.emit('entrarChat', usuario, function (resp) {
         console.log('Usuarios conectados', resp);
+        redenderizarUsuarios(resp);
+        scrollBottom();
     });
 });
 
@@ -29,7 +31,8 @@ socket.on('disconnect', function (data) {
 
 /* Escuchar información */
 socket.on('crearMensaje', function (mensaje) {
-    console.log('Servidor:', mensaje);
+    // console.log('Servidor:', mensaje);
+    renderizarMensjar(mensaje, false);
 });
 
 /*  
@@ -38,6 +41,7 @@ socket.on('crearMensaje', function (mensaje) {
 */
 socket.on('listarPersonas', function (personas) {
     console.log(personas);
+    redenderizarUsuarios(personas);
 });
 
 /* Mensajes privados */
